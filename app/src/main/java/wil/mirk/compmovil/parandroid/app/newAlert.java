@@ -22,6 +22,8 @@ public class newAlert extends ActionBarActivity {
     String _receptor;
     String _nroreceptor;
     String _cuerpoMensaje;
+    String _user;
+    String _password;
     EditText _cuerpo;
     Button _botonSiguiente;
     CheckBox _smsCheck, _mailCheck, _gpsCheck;
@@ -33,7 +35,9 @@ public class newAlert extends ActionBarActivity {
         setContentView(R.layout.activity_new_alert);
 
 
-        _receptor = "darkwilsor@gmail.com";
+        _receptor = "darkwilsor@gmail.com";//quien recibe el mail
+        _user = "darkwilsor@gmail.com";//quien lo manda
+        _password = "" ;//ingresar password del mail
         _nroreceptor = "01164209786";
 
         _mailCheck = (CheckBox) findViewById(R.id.mail_check);
@@ -153,7 +157,7 @@ public class newAlert extends ActionBarActivity {
            /* String[] attachements = null;*/
 
 
-            Mail mail = new Mail();
+            Mail mail = new Mail(_password, _user);
 
             if (subject != null && subject.length() > 0) {
                 mail.setSubject(subject);
@@ -168,6 +172,9 @@ public class newAlert extends ActionBarActivity {
             }
 
             mail.setTo(new String[] {to});
+
+            mail.setFrom(_receptor);
+            mail.setPassword("Tanarinototoro18");
 
 /*            if (attachements != null) {
                 for (String attachement : attachements) {
