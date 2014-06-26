@@ -1,15 +1,9 @@
 package wil.mirk.compmovil.parandroid.app;
 
-import android.content.Context;
-import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -121,21 +114,20 @@ public class newAlert extends ActionBarActivity {
         String message = _cuerpoMensaje;
 
         try {
+
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            /*Toast.makeText(getApplicationContext(), "SMS sent.",
-                    Toast.LENGTH_LONG).show();*/
+
         } catch (Exception e) {
-            /*Toast.makeText(getApplicationContext(),
-                    "SMS failed, please try again.",
-                    Toast.LENGTH_LONG).show();*/
+
+
             e.printStackTrace();
         }
     }
 
-    protected void enviarMail() {
+    protected void enviarMail() throws Exception{
 
-        String[] recipients = {_receptor};
+/*        String[] recipients = {_receptor};
         Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
         // prompts email clients only
         email.setType("message/rfc822");
@@ -153,7 +145,37 @@ public class newAlert extends ActionBarActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(newAlert.this, "No hay cliente de mail instalado",
                     Toast.LENGTH_LONG).show();
-        }
+        }*/
+
+            String to = _receptor;
+            String subject = "alarma!";
+            String message = _cuerpoMensaje ;
+           /* String[] attachements = null;*/
+
+
+            Mail mail = new Mail();
+
+            if (subject != null && subject.length() > 0) {
+                mail.setSubject(subject);
+            } else {
+                mail.setSubject("Subject");
+            }
+
+            if (message != null && message.length() > 0) {
+                mail.setBody(message);
+            } else {
+                mail.setBody("Message");
+            }
+
+            mail.setTo(new String[] {to});
+
+/*            if (attachements != null) {
+                for (String attachement : attachements) {
+                    mail.addAttachment(attachement);
+                }
+            }*/
+           mail.send();
+
     }
 
     private class ejecutarAlarma extends AsyncTask  {
@@ -167,7 +189,11 @@ public class newAlert extends ActionBarActivity {
                     }*/
 
                     if (_mailCheck.isChecked()) {
-                        enviarMail();
+                        try {
+                            enviarMail();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     if (_smsCheck.isChecked()){
