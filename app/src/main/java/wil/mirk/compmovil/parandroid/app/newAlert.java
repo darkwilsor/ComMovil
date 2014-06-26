@@ -1,5 +1,6 @@
 package wil.mirk.compmovil.parandroid.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
@@ -27,6 +28,7 @@ public class newAlert extends ActionBarActivity {
 
     String _receptor;
     String _nroreceptor;
+    String _cuerpoMensaje;
     EditText _cuerpo;
     Button _botonSiguiente;
     CheckBox _smsCheck, _mailCheck, _gpsCheck;
@@ -51,7 +53,11 @@ public class newAlert extends ActionBarActivity {
         _tiempo = (long) 6000;
 
 
+        _cuerpoMensaje = _cuerpo.getText().toString();
 
+        if(_gpsCheck.isChecked()){
+            agregarUbicacion();
+        }
 
 
         _botonSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +81,34 @@ public class newAlert extends ActionBarActivity {
 
     protected void agregarUbicacion(){
 
-/*        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+/*
+        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criterio = new Criteria();
         String provider = mLocationManager.getBestProvider(criterio, false);
         Location location = mLocationManager.getLastKnownLocation(provider);
 
         String _ubicacion = location.toString();
 
-        _cuerpo.setText(_cuerpo.getText() + "Mi ultima ubicacion es :" +  _ubicacion);*/
+        _cuerpoMensaje = _cuerpoMensaje + "Mi ultima ubicacion es :" +  _ubicacion;
+
+*/
+
+
+        GPSTracker _tracker = new GPSTracker(this);
+
+
+        Double location =_tracker.getLatitude();
+
+
+        String _ubicacion = location.toString();
+
+        location = _tracker.getLongitude();
+
+        _ubicacion = _ubicacion + location.toString();
+
+
+
+        _cuerpoMensaje = _cuerpoMensaje + "Mi ultima ubicacion es :" +  _ubicacion;
 
 
 
@@ -92,17 +118,17 @@ public class newAlert extends ActionBarActivity {
         Log.i("Send SMS", "");
 
         String phoneNo = _nroreceptor;
-        String message = _cuerpo.getText().toString();
+        String message = _cuerpoMensaje;
 
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            Toast.makeText(getApplicationContext(), "SMS sent.",
-                    Toast.LENGTH_LONG).show();
+            /*Toast.makeText(getApplicationContext(), "SMS sent.",
+                    Toast.LENGTH_LONG).show();*/
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),
+            /*Toast.makeText(getApplicationContext(),
                     "SMS failed, please try again.",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();*/
             e.printStackTrace();
         }
     }
@@ -116,7 +142,7 @@ public class newAlert extends ActionBarActivity {
 
         email.putExtra(Intent.EXTRA_EMAIL, recipients);
         email.putExtra(Intent.EXTRA_SUBJECT, "alerta");
-        email.putExtra(Intent.EXTRA_TEXT, _cuerpo.getText().toString());
+        email.putExtra(Intent.EXTRA_TEXT, _cuerpoMensaje);
 
 
 
@@ -136,9 +162,9 @@ public class newAlert extends ActionBarActivity {
         protected Object doInBackground(Object[] objects) {
 
 
-                    if(_gpsCheck.isChecked()){
+/*                    if(_gpsCheck.isChecked()){
                         agregarUbicacion();
-                    }
+                    }*/
 
                     if (_mailCheck.isChecked()) {
                         enviarMail();

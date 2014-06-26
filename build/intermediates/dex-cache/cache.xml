@@ -2,16 +2,16 @@
 <pre-dex-items>
 
     <item
-        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/classes-ea4db9386b4b5c7486ca2387340e418e8ad8a838.jar"
-        jar="/home/wilsor/AndroidStudioProjects/Parandroid/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        dex="/home/wilsor/Android studioProjects/ComMovil/app/build/intermediates/pre-dexed/debug/support-v4-19.0.1-125a0f50cca6aeaecc40ba74ff80a1a354eb26ea.jar"
+        jar="/home/wilsor/Escritorio/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.1/support-v4-19.0.1.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
     <item
-        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-c013ff644184e75fe6f6c49ddc4b27dddd67bcc5.jar"
-        jar="/home/wilsor/Escritorio/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        dex="/home/wilsor/Android studioProjects/ComMovil/app/build/intermediates/pre-dexed/debug/classes-12305a7b25421d09650700a9bca4743a255d756a.jar"
+        jar="/home/wilsor/Android studioProjects/ComMovil/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.0.1/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+        sha1="f71a6822470c9eb659d4f4a6cb57b780b35f058b"/>
 
 </pre-dex-items>
