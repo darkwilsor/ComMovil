@@ -74,22 +74,34 @@
         android:hint="@string/hint_text"
         android:textColor="#3B0B0B"
         android:textColorHint="#0B0B3B"
-        android:background="@drawable/fondo_celeste"/>
+        android:background="#81F7F3"/>
 
+        <LinearLayout
+            android:layout_width="370dp"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp">
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/foto"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Agregar foto"
         android:id="@+id/agregarFoto"
-        android:layout_weight="0.10" />
+        android:layout_marginLeft="20dp"
+        android:background="#FF0000"
+        />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/boton_siguiente"
         android:id="@+id/boton_siguiente"
         android:layout_gravity="right"
-        android:layout_marginTop="10dp"/>
-</LinearLayout>
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:background="#FF0000"
+        />
 
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

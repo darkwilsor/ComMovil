@@ -29,6 +29,7 @@ public class inicializando_timer extends Activity
                 setear_alarma = (Button)findViewById(R.id.button_timer);
                 tiempoDeAlarma = (TimePicker)findViewById(R.id.timePicker);
 
+
                                                 // no me deja pone OnClickListener()
                 setear_alarma.setOnClickListener(new View.OnClickListener()
                 {
