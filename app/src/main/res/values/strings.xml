@@ -15,4 +15,8 @@
     <string name="foto">Agregar foto</string>
 
 
+    <string name="destinatario">INGRESE CONTACTO</string>
+    <string name="agregar_contacto">Agregar</string>
+    <string name="timerPiker">tiempo</string>
+    <string name="button_timer">Continuar</string>
 </resources>

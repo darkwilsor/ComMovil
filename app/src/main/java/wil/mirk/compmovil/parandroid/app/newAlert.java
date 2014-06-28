@@ -40,7 +40,8 @@ public class newAlert extends ActionBarActivity {
     static final int REQUEST_TAKE_PHOTO = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_alert);
 
@@ -83,14 +84,6 @@ public class newAlert extends ActionBarActivity {
 
             }
         });
-
-
-
-
-
-
-
-
 
 
     }
