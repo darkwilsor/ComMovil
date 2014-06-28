@@ -5,11 +5,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,14 +18,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class newAlert extends ActionBarActivity {
 
     String _receptor;
-    String _nroreceptor;
     String _cuerpoMensaje;
     String _user;
     String _password;
@@ -37,6 +31,8 @@ public class newAlert extends ActionBarActivity {
     Button _botonFoto;
     CheckBox _smsCheck, _mailCheck, _gpsCheck;
     Long _tiempo;
+    String _dondeEstaLaFoto;
+
     static final int REQUEST_TAKE_PHOTO = 1;
 
     @Override
@@ -49,7 +45,7 @@ public class newAlert extends ActionBarActivity {
         _receptor = "darkwilsor@gmail.com";//quien recibe el mail
         _user = "darkwilsor@gmail.com";//quien lo manda
         _password = "" ;//ingresar password del mail
-        _nroreceptor = "01164209786";
+
 
         _mailCheck = (CheckBox) findViewById(R.id.mail_check);
         _smsCheck = (CheckBox) findViewById(R.id.sms_check);
@@ -59,35 +55,54 @@ public class newAlert extends ActionBarActivity {
         _botonSiguiente = (Button) findViewById(R.id.boton_siguiente);
         _botonFoto = (Button) findViewById(R.id.agregarFoto);
 
-        _tiempo = (long) 6000;
 
 
-        _cuerpoMensaje = _cuerpo.getText().toString();
 
-        if(_gpsCheck.isChecked()){
-            agregarUbicacion();
-        }
+
 
         _botonFoto.setOnClickListener(new View.OnClickListener(){
              public void onClick (View view){
                 lanzarIntentFoto();
              }
-
-
         });
+
+
+
 
 
         _botonSiguiente.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
 
-                hacerSonarAlarmaEn();
+                _cuerpoMensaje = _cuerpo.getText().toString();
 
+                if(_gpsCheck.isChecked()){
+                    agregarUbicacion();
+                }
+
+                Intent _timerInt = new Intent(newAlert.this, inicializando_timer.class);
+                Bundle _datosPasados = new Bundle();
+
+
+                _datosPasados.putBoolean("_sms",_smsCheck.isChecked());
+                _datosPasados.putBoolean("_mail",_mailCheck.isChecked());
+                _datosPasados.putString ("_cuerpoMensaje", _cuerpoMensaje);
+                _datosPasados.putString ("_dondeEstaLaFoto", _dondeEstaLaFoto);
+
+                _timerInt.putExtras(_datosPasados);
+
+                startActivity(_timerInt);
+
+                finish();
+
+
+
+            /*    hacerSonarAlarmaEn();*/
             }
         });
 
 
     }
-    String _dondeEstaLaFoto;
+
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -128,22 +143,10 @@ public class newAlert extends ActionBarActivity {
 
     protected void agregarUbicacion(){
 
-/*
-        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criterio = new Criteria();
-        String provider = mLocationManager.getBestProvider(criterio, false);
-        Location location = mLocationManager.getLastKnownLocation(provider);
-
-        String _ubicacion = location.toString();
-
-        _cuerpoMensaje = _cuerpoMensaje + "Mi ultima ubicacion es :" +  _ubicacion;
-
-*/
-
 
         GPSTracker _tracker = new GPSTracker(this);
         Double location =_tracker.getLatitude();
-        String _ubicacion = location.toString();
+        String _ubicacion = location.toString() + ' ';
         location = _tracker.getLongitude();
         _ubicacion = _ubicacion + location.toString();
 
@@ -151,11 +154,9 @@ public class newAlert extends ActionBarActivity {
 
         _cuerpoMensaje = _cuerpoMensaje + "Mi ultima ubicacion es :" +  _ubicacion;
 
-
-
     }
 
-    protected void enviarSMS() {
+/*    protected void enviarSMS() {
         Log.i("Send SMS", "");
 
         String phoneNo = _nroreceptor;
@@ -171,11 +172,11 @@ public class newAlert extends ActionBarActivity {
 
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
-    protected void enviarMail() throws Exception{
+/*    protected void enviarMail() throws Exception{*/
 
 /*        String[] recipients = {_receptor};
         Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
@@ -193,9 +194,11 @@ public class newAlert extends ActionBarActivity {
             startActivity(Intent.createChooser(email, "Seleccionar Cliente de mail..."));
 
         } catch (android.content.ActivityNotFoundException ex) {
+/*
             Toast.makeText(newAlert.this, "No hay cliente de mail instalado",
                     Toast.LENGTH_LONG).show();
-        }*/
+        }*//*
+
 
             String to = _receptor;
             String subject = "alarma!";
@@ -220,7 +223,7 @@ public class newAlert extends ActionBarActivity {
             mail.setTo(new String[] {to});
 
             mail.setFrom(_receptor);
-            mail.setPassword("Tanarinototoro18");
+
 
             if (attachement != null) {
                   mail.addAttachment(attachement);
@@ -229,6 +232,7 @@ public class newAlert extends ActionBarActivity {
            mail.send();
 
     }
+*/
 
 
 
@@ -244,48 +248,25 @@ public class newAlert extends ActionBarActivity {
         protected Object doInBackground(Object[] objects) {
 
 
-/*                    if(_gpsCheck.isChecked()){
-                        agregarUbicacion();
-                    }*/
 
-                    if (_mailCheck.isChecked()) {
+/*                    if (_mailCheck.isChecked()) {
                         try {
                             enviarMail();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }
+                    }*/
 
-                    if (_smsCheck.isChecked()){
+/*                    if (_smsCheck.isChecked()){
                         enviarSMS();
-                    }
+                    }*/
 
             return null;
         }
     }
 
 
-    public void hacerSonarAlarmaEn() {
-        final Handler _handler = new Handler();
-        Timer _timer = new Timer();
-        TimerTask _ejecutarAsynchronousTask = new TimerTask() {
-            @Override
-            public void run() {
-                _handler.post(new Runnable() {
-                    public void run() {
-                        try {
-                            ejecutarAlarma alarmaAEjecutar = new ejecutarAlarma();
-                            // ejecuta la asyntask creada
-                            alarmaAEjecutar.execute();
-                        } catch (Exception e) {
-                            // TODO Auto-generated catch block
-                        }
-                    }
-                });
-            }
-        };
-        _timer.schedule(_ejecutarAsynchronousTask, _tiempo); //tiempo en ms
-    }
+
 
 
     @Override
