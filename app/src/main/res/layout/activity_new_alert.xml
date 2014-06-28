@@ -97,7 +97,7 @@
         android:text="@string/boton_siguiente"
         android:id="@+id/boton_siguiente"
         android:layout_gravity="right"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="75dp"
         android:layout_marginTop="10dp"
         android:background="#FF0000"
         />
