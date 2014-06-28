@@ -2,14 +2,11 @@ package wil.mirk.compmovil.parandroid.app;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.provider.ContactsContract;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.SimpleAdapter;
 

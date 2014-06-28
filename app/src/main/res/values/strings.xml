@@ -13,6 +13,7 @@
     <string name="boton_siguiente">Siguiente</string>
     <string name="hint_text">Mensaje a enviar</string>
     <string name="foto">Agregar foto</string>
+    <string name="comenzar">Incializar Alarma</string>
 
 
     <string name="destinatario">INGRESE CONTACTO</string>

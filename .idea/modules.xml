@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ComMovil.iml" filepath="$PROJECT_DIR$/ComMovil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Parandroid.iml" filepath="$PROJECT_DIR$/Parandroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
