@@ -1,8 +1,12 @@
 package wil.mirk.compmovil.parandroid.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -13,6 +17,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,8 +34,10 @@ public class newAlert extends ActionBarActivity {
     String _password;
     EditText _cuerpo;
     Button _botonSiguiente;
+    Button _botonFoto;
     CheckBox _smsCheck, _mailCheck, _gpsCheck;
     Long _tiempo;
+    static final int REQUEST_TAKE_PHOTO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,7 @@ public class newAlert extends ActionBarActivity {
 
         _cuerpo = (EditText) findViewById(R.id.cuerpo);
         _botonSiguiente = (Button) findViewById(R.id.boton_siguiente);
+        _botonFoto = (Button) findViewById(R.id.agregarFoto);
 
         _tiempo = (long) 6000;
 
@@ -56,8 +67,16 @@ public class newAlert extends ActionBarActivity {
             agregarUbicacion();
         }
 
+        _botonFoto.setOnClickListener(new View.OnClickListener(){
+             public void onClick (View view){
+                lanzarIntentFoto();
+             }
 
-        _botonSiguiente.setOnClickListener(new View.OnClickListener() {
+
+        });
+
+
+        _botonSiguiente.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
 
                 hacerSonarAlarmaEn();
@@ -74,6 +93,44 @@ public class newAlert extends ActionBarActivity {
 
 
 
+    }
+    String _dondeEstaLaFoto;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String _nombreArchivo= "JPEG_" + timeStamp + "_";
+
+        File _path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(
+                _nombreArchivo,
+                ".jpg",
+                _path
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        _dondeEstaLaFoto = imagen.getAbsolutePath();
+        return imagen;
+    }
+    private void lanzarIntentFoto() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+
+
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
     }
 
     protected void agregarUbicacion(){
@@ -92,15 +149,9 @@ public class newAlert extends ActionBarActivity {
 
 
         GPSTracker _tracker = new GPSTracker(this);
-
-
         Double location =_tracker.getLatitude();
-
-
         String _ubicacion = location.toString();
-
         location = _tracker.getLongitude();
-
         _ubicacion = _ubicacion + location.toString();
 
 
@@ -129,6 +180,8 @@ public class newAlert extends ActionBarActivity {
         }
     }
 
+
+
     protected void enviarMail() throws Exception{
 
 /*        String[] recipients = {_receptor};
@@ -154,7 +207,7 @@ public class newAlert extends ActionBarActivity {
             String to = _receptor;
             String subject = "alarma!";
             String message = _cuerpoMensaje ;
-           /* String[] attachements = null;*/
+            String attachement = _dondeEstaLaFoto;
 
 
             Mail mail = new Mail(_password, _user);
@@ -176,14 +229,21 @@ public class newAlert extends ActionBarActivity {
             mail.setFrom(_receptor);
             mail.setPassword("Tanarinototoro18");
 
-/*            if (attachements != null) {
-                for (String attachement : attachements) {
-                    mail.addAttachment(attachement);
-                }
-            }*/
+            if (attachement != null) {
+                  mail.addAttachment(attachement);
+            }
+
            mail.send();
 
     }
+
+
+
+
+
+
+
+
 
     private class ejecutarAlarma extends AsyncTask  {
 
@@ -209,11 +269,6 @@ public class newAlert extends ActionBarActivity {
 
             return null;
         }
-
-
-
-
-
     }
 
 
