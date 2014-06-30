@@ -21,18 +21,21 @@ import java.util.Date;
 
 public class newAlert extends ActionBarActivity {
 
-    String _receptor;
+
     String _cuerpoMensaje;
-    String _user;
-    String _password;
+
     EditText _cuerpo;
+
     Button _botonSiguiente;
     Button _botonFoto;
+
     CheckBox _smsCheck, _mailCheck, _gpsCheck;
-    Long _tiempo;
+
     String _dondeEstaLaFoto;
 
     static final int REQUEST_TAKE_PHOTO = 1;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,9 +44,7 @@ public class newAlert extends ActionBarActivity {
         setContentView(R.layout.activity_new_alert);
 
 
-        _receptor = "darkwilsor@gmail.com";//quien recibe el mail
-        _user = "darkwilsor@gmail.com";//quien lo manda
-        _password = "" ;//ingresar password del mail
+
 
 
         _mailCheck = (CheckBox) findViewById(R.id.mail_check);
@@ -102,7 +103,7 @@ public class newAlert extends ActionBarActivity {
 
 
     private File createImageFile() throws IOException {
-        // Create an image file name
+        // Crea un nombre unico para evitar coliciones
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String _nombreArchivo= "JPEG_" + timeStamp + "_";
 
@@ -113,17 +114,17 @@ public class newAlert extends ActionBarActivity {
                 _path
         );
 
-        // Save a file: path for use with ACTION_VIEW intents
-        _dondeEstaLaFoto = imagen.getAbsolutePath();
+
+        _dondeEstaLaFoto = imagen.getAbsolutePath();//guardo path de la foto
         return imagen;
     }
 
 
     private void lanzarIntentFoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
+        //se fija si que se pueda hacer el intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
+            //llamo a createImageFile para que cree la imagen
             File photoFile = null;
             try {
                 photoFile = createImageFile();
@@ -131,7 +132,7 @@ public class newAlert extends ActionBarActivity {
 
 
             }
-            // Continue only if the File was successfully created
+            //si el archivo fue creado sigo
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
@@ -150,9 +151,8 @@ public class newAlert extends ActionBarActivity {
         _ubicacion = _ubicacion + location.toString();
 
 
-
         _cuerpoMensaje = _cuerpoMensaje + " Mi ultima ubicacion es : " +  _ubicacion;
-
+        //agrego al mensaje original las coordenadas actuales
     }
 
 

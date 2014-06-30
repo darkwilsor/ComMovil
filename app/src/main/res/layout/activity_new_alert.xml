@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/gradiente_azul" />
+/>
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +26,7 @@
         android:layout_weight="0.10"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:textColor="#FF0000"/>
+     />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/contenido"
-        android:textColor="#FF0000"
+
         android:id="@+id/contenido"
         android:layout_marginTop="10dp"
         />
@@ -72,9 +72,9 @@
         android:layout_weight="0.44"
         android:layout_gravity="center"
         android:hint="@string/hint_text"
-        android:textColor="#3B0B0B"
-        android:textColorHint="#0B0B3B"
-        android:background="#81F7F3"/>
+
+
+        android:background="#ffa4f7e8"/>
 
         <LinearLayout
             android:layout_width="370dp"
@@ -88,7 +88,7 @@
         android:text="Agregar foto"
         android:id="@+id/agregarFoto"
         android:layout_marginLeft="20dp"
-        android:background="#FF0000"
+
         />
 
     <Button
@@ -99,7 +99,7 @@
         android:layout_gravity="right"
         android:layout_marginLeft="75dp"
         android:layout_marginTop="10dp"
-        android:background="#FF0000"
+
         />
 
         </LinearLayout>

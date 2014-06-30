@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="wil.mirk.compmovil.parandroid.app" >
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
-
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
     <application
+        android:name=".globalApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".globalApp">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="wil.mirk.compmovil.parandroid.app.newAlert"
+            android:name=".newAlert"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="wil.mirk.compmovil.parandroid.app.inicializando_timer"
+            android:name=".inicializando_timer"
             android:label="timer"
-            android:parentActivityName="wil.mirk.compmovil.parandroid.app.newAlert">
+            android:parentActivityName=".newAlert" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wil.mirk.compmovil.parandroid.app.newAlert" />
         </activity>
-
         <activity
-            android:name="wil.mirk.compmovil.parandroid.app.cancelarAlarma"
+            android:name=".cancelarAlarma"
             android:label="Cancelar Timer"
-            android:parentActivityName="wil.mirk.compmovil.parandroid.app.cancelarAlarma"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:parentActivityName=".cancelarAlarma" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wil.mirk.compmovil.parandroid.app.newAlert" />
         </activity>
-
     </application>
-
-
 
 </manifest>

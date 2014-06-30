@@ -15,7 +15,9 @@ import android.widget.EditText;
 public class cancelarAlarma extends ActionBarActivity {
 
     EditText _passwordAlarma;
+
     Button _botonCancelar;
+
     String _passwordUsuario;
     String _password;
 
@@ -34,7 +36,6 @@ public class cancelarAlarma extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 _passwordUsuario = _passwordAlarma.getText().toString();
-
 
 
                 _password = ((globalApp)getApplication()).getPasswordGlobal().toString();
