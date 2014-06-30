@@ -2,7 +2,6 @@ package wil.mirk.compmovil.parandroid.app;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -95,8 +94,6 @@ public class newAlert extends ActionBarActivity {
                 finish();
 
 
-
-            /*    hacerSonarAlarmaEn();*/
             }
         });
 
@@ -120,6 +117,8 @@ public class newAlert extends ActionBarActivity {
         _dondeEstaLaFoto = imagen.getAbsolutePath();
         return imagen;
     }
+
+
     private void lanzarIntentFoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -152,120 +151,9 @@ public class newAlert extends ActionBarActivity {
 
 
 
-        _cuerpoMensaje = _cuerpoMensaje + "Mi ultima ubicacion es :" +  _ubicacion;
+        _cuerpoMensaje = _cuerpoMensaje + " Mi ultima ubicacion es : " +  _ubicacion;
 
     }
-
-/*    protected void enviarSMS() {
-        Log.i("Send SMS", "");
-
-        String phoneNo = _nroreceptor;
-        String message = _cuerpoMensaje;
-
-        try {
-
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, message, null, null);
-
-        } catch (Exception e) {
-
-
-            e.printStackTrace();
-        }
-    }*/
-
-
-
-/*    protected void enviarMail() throws Exception{*/
-
-/*        String[] recipients = {_receptor};
-        Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
-        // prompts email clients only
-        email.setType("message/rfc822");
-
-        email.putExtra(Intent.EXTRA_EMAIL, recipients);
-        email.putExtra(Intent.EXTRA_SUBJECT, "alerta");
-        email.putExtra(Intent.EXTRA_TEXT, _cuerpoMensaje);
-
-
-
-        try {
-            // the user can choose the email client
-            startActivity(Intent.createChooser(email, "Seleccionar Cliente de mail..."));
-
-        } catch (android.content.ActivityNotFoundException ex) {
-/*
-            Toast.makeText(newAlert.this, "No hay cliente de mail instalado",
-                    Toast.LENGTH_LONG).show();
-        }*//*
-
-
-            String to = _receptor;
-            String subject = "alarma!";
-            String message = _cuerpoMensaje ;
-            String attachement = _dondeEstaLaFoto;
-
-
-            Mail mail = new Mail(_password, _user);
-
-            if (subject != null && subject.length() > 0) {
-                mail.setSubject(subject);
-            } else {
-                mail.setSubject("Subject");
-            }
-
-            if (message != null && message.length() > 0) {
-                mail.setBody(message);
-            } else {
-                mail.setBody("Message");
-            }
-
-            mail.setTo(new String[] {to});
-
-            mail.setFrom(_receptor);
-
-
-            if (attachement != null) {
-                  mail.addAttachment(attachement);
-            }
-
-           mail.send();
-
-    }
-*/
-
-
-
-
-
-
-
-
-
-    private class ejecutarAlarma extends AsyncTask  {
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-
-
-
-/*                    if (_mailCheck.isChecked()) {
-                        try {
-                            enviarMail();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }*/
-
-/*                    if (_smsCheck.isChecked()){
-                        enviarSMS();
-                    }*/
-
-            return null;
-        }
-    }
-
-
 
 
 

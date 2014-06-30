@@ -2,18 +2,6 @@
 <pre-dex-items>
 
     <item
-        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/activation-e8e35a96ec16a7ab5f27535e04c7d5fbcb4566c6.jar"
-        jar="/home/wilsor/AndroidStudioProjects/Parandroid/app/libs/activation.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383"/>
-    <item
-        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-c013ff644184e75fe6f6c49ddc4b27dddd67bcc5.jar"
-        jar="/home/wilsor/Escritorio/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
-    <item
         dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/classes-ea4db9386b4b5c7486ca2387340e418e8ad8a838.jar"
         jar="/home/wilsor/AndroidStudioProjects/Parandroid/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
         jumboMode="false"
@@ -31,5 +19,23 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="428e267abff0d10802ccde86b915da2c20471160"/>
+    <item
+        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/activation-e8e35a96ec16a7ab5f27535e04c7d5fbcb4566c6.jar"
+        jar="/home/wilsor/AndroidStudioProjects/Parandroid/app/libs/activation.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383"/>
+    <item
+        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-c013ff644184e75fe6f6c49ddc4b27dddd67bcc5.jar"
+        jar="/home/wilsor/Escritorio/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/home/wilsor/AndroidStudioProjects/Parandroid/app/build/intermediates/pre-dexed/debug/classes-f03da7862760996a92c707e0b0a0f69d0e0ef93c.jar"
+        jar="/home/wilsor/AndroidStudioProjects/Parandroid/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.2.42/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e5f81129dfb3d02df80126512bc98278ed2bb40a"/>
 
 </pre-dex-items>

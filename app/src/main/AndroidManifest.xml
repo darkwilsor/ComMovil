@@ -17,7 +17,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".globalApp">
         <activity
             android:name="wil.mirk.compmovil.parandroid.app.newAlert"
             android:label="@string/app_name" >
@@ -31,11 +32,23 @@
             android:name="wil.mirk.compmovil.parandroid.app.inicializando_timer"
             android:label="timer"
             android:parentActivityName="wil.mirk.compmovil.parandroid.app.newAlert">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="wil.mirk.compmovil.parandroid.app.newAlert" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wil.mirk.compmovil.parandroid.app.newAlert" />
         </activity>
 
-     </application>
+        <activity
+            android:name="wil.mirk.compmovil.parandroid.app.cancelarAlarma"
+            android:label="Cancelar Timer"
+            android:parentActivityName="wil.mirk.compmovil.parandroid.app.cancelarAlarma"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wil.mirk.compmovil.parandroid.app.newAlert" />
+        </activity>
+
+    </application>
+
+
 
 </manifest>

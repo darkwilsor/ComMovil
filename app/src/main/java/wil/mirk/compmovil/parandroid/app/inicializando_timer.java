@@ -1,6 +1,7 @@
 package wil.mirk.compmovil.parandroid.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,7 +67,7 @@ public class inicializando_timer extends Activity
 
 
 
-            Integer[] tiempos = new Integer[]{1, 30, 60, 90, 120};
+            Integer[] tiempos = new Integer[]{4, 30, 60, 90, 120};
 
             ArrayAdapter<Integer> _adaptador = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, tiempos);
 
@@ -80,9 +81,16 @@ public class inicializando_timer extends Activity
 
                     _tiempo = (Integer) _tiempoHastaAlarma.getSelectedItem();
 
-                    _tiempo *= 60 * 1000;
+                    _tiempo *= 60 * 1000; //tiempo em ms
 
                     hacerSonarAlarmaEn();
+
+
+                    //boton de home para minimizar la app
+                    Intent startMain = new Intent(Intent.ACTION_MAIN);
+                    startMain.addCategory(Intent.CATEGORY_HOME);
+                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startMain);
 
                 }
             });
@@ -146,47 +154,81 @@ public class inicializando_timer extends Activity
             @Override
             protected Object doInBackground(Object[] objects) {
 
+                if (_sms){
+                    enviarSMS();
+                }
 
-
-                    if (_mail) {
-                        try {
-                            enviarMail();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                if (_mail) {
+                    try {
+                        enviarMail();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                    if (_sms){
-                        enviarSMS();
-                    }
-
+                }
                 return null;
             }
         }
 
+        private class cancelarAlarma {
+
+          Intent _timerInt = new Intent(inicializando_timer.this, inicializando_timer.class);
+
+
+        }
+        final Timer _timer = new Timer();
+
         public void hacerSonarAlarmaEn() {
             final Handler _handler = new Handler();
-            Timer _timer = new Timer();
+            Integer _3min = 1000*60*3;
+
+
             TimerTask _ejecutarAsynchronousTask = new TimerTask() {
                 @Override
                 public void run() {
                     _handler.post(new Runnable() {
                         public void run() {
-                            try {
-                                ejecutarAlarma alarmaAEjecutar = new ejecutarAlarma();
-                                // ejecuta la asyntask creada
-                                alarmaAEjecutar.execute();
-                            } catch (Exception e) {
-                                // TODO Auto-generated catch block
+
+                            boolean _cancelado = false;
+
+                            _cancelado = ((globalApp)getApplication()).getCancelado();
+
+
+
+                            if (_cancelado){
+
+                                _timer.purge();
+
+                            } else {
+
+                                try {
+                                    ejecutarAlarma alarmaAEjecutar = new ejecutarAlarma();
+                                    // ejecuta la asyntask creada
+                                    alarmaAEjecutar.execute();
+
+                                } catch (Exception e) {
+                                    // TODO Auto-generated catch block
+                                }
                             }
                         }
                     });
                 }
             };
+
+            TimerTask _cancelarAlarma =new TimerTask() {
+                @Override
+                public void run() {
+
+                    Intent _cancelarAlarmaInt = new Intent(inicializando_timer.this, wil.mirk.compmovil.parandroid.app.cancelarAlarma.class);
+                    _cancelarAlarmaInt.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(_cancelarAlarmaInt);
+
+                }
+            };
+
+
+            _timer.schedule(_cancelarAlarma, _tiempo - _3min); //doy la chanse de cancelar la alarma
             _timer.schedule(_ejecutarAsynchronousTask, _tiempo); //tiempo en ms
         }
-
-
 
 
 

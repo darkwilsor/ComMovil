@@ -14,10 +14,10 @@
     <string name="hint_text">Mensaje a enviar</string>
     <string name="foto">Agregar foto</string>
     <string name="comenzar">Incializar Alarma</string>
-
-
     <string name="destinatario">INGRESE CONTACTO</string>
     <string name="agregar_contacto">Agregar</string>
     <string name="timerPiker">tiempo</string>
     <string name="button_timer">Continuar</string>
+    <string name="cancelarAlarma">Cancelar Alarma</string>
+
 </resources>
