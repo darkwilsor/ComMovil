@@ -7,10 +7,10 @@
     <string name="titulo_alerta">Crear Nueva Alerta</string>
     <string name="mail_check">Enviar Alerta por Mail</string>
     <string name="sms_check">Enviar Alerta pos SMS</string>
-    <string name="nueva_alerta">Crear Nueva Alerta</string>
+    <string name="nueva_alerta">CREAR NUEVA ALERTA</string>
     <string name="contenido">Agregar Texto de Mensaje</string>
     <string name="ubicacion">Adjuntar ubicación actual</string>
-    <string name="boton_siguiente">Siguiente</string>
+    <string name="boton_siguiente"> Siguiente  </string>
     <string name="hint_text">Mensaje a enviar</string>
     <string name="foto">Agregar foto</string>
     <string name="comenzar">Incializar Alarma</string>
