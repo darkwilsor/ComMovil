@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+    <EditTextPreference android:title="Usuario de Mail"
+        android:key="Usuario"
+        android:summary="Ingrese su mail"/>
+
+
+    <EditTextPreference android:title="Contraseña"
+        android:key="Contraseña"
+        android:summary="Ingrese la contraseña de su cuenta de mail"/>
+
+
+
+    <Preference
+        android:title="Agregar contactos de emergencia"
+        android:key="_agregarContactos"
+        android:summary="Agregar contactos para ser notificados  por SMS en caso de que la alarma se accione"/>
+
+    <Preference
+        android:title="Agregar Mails de emergencia"
+        android:key="_agregarMails"
+        android:summary="Agregar contactos para ser notificados por MAIL en caso de que la alarma se accione"/>
+
+
+
+</PreferenceScreen>

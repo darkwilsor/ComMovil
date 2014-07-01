@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="pref_user_profile" >
+        <EditTextPreference
+            android:title="pref_user_name"
+            android:summary="pref_user_name_summary"
+            android:key="prefUsername"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="pref_update_setting" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefSendReport"
+            android:summary="pref_send_report_summary"
+            android:title="pref_send_report" >
+        </CheckBoxPreference>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

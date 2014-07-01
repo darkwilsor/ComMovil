@@ -34,7 +34,7 @@ public class newAlert extends ActionBarActivity {
     String _dondeEstaLaFoto;
 
     static final int REQUEST_TAKE_PHOTO = 1;
-
+    private static final int RESULT_SETTINGS = 1;
 
 
     @Override
@@ -42,7 +42,6 @@ public class newAlert extends ActionBarActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_alert);
-
 
 
 
@@ -161,7 +160,7 @@ public class newAlert extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.new_alert, menu);
+        getMenuInflater().inflate(R.menu.settings, menu);
         return true;
     }
 
@@ -170,11 +169,17 @@ public class newAlert extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+
+            case R.id.menu_settings:
+                Intent i = new Intent(this, appPreferences.class);
+                startActivityForResult(i, RESULT_SETTINGS);
+                break;
+
         }
-        return super.onOptionsItemSelected(item);
+
+        return true;
     }
+
 
 }

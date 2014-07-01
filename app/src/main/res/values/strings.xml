@@ -19,5 +19,6 @@
     <string name="timerPiker">tiempo</string>
     <string name="button_timer">Continuar</string>
     <string name="cancelarAlarma">Cancelar Alarma</string>
+    <string name="title_activity_app_preferences">AppPreferences</string>
 
 </resources>
