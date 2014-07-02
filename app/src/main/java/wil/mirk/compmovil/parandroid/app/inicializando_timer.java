@@ -1,10 +1,14 @@
 package wil.mirk.compmovil.parandroid.app;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,11 +30,14 @@ public class inicializando_timer extends Activity
 
         Button setear_alarma;
 
+        String[] _receptor;
+        Set<String> _listSMS;
+
         String _nroreceptor;
         String _cuerpoMensaje;
         String _user;
         String _password;
-        String _receptor;
+
         String _dondeEstaLaFoto;
 
         Boolean _sms;
@@ -38,6 +48,9 @@ public class inicializando_timer extends Activity
 
 
 
+
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
 
         protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +58,27 @@ public class inicializando_timer extends Activity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_timer);
 
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(inicializando_timer.this);
+
+
+
             /*========================VALORES HARCODEADOS ALPHA========================================*/
 
-            _nroreceptor = "";      //numero de telefono de
-            _user = "";             //usuario de cuenta de mail
-            _password = "";         //password de usuario de mail
-            _receptor = "";         //mail de quien va a recivir la alerta
+            _listSMS = new HashSet<String>();
+            Set<String> _listMail = new HashSet<String>();
+
+            _listMail = prefs.getStringSet("MAIL", _listMail );
+            _listSMS = prefs.getStringSet("SMS", _listSMS );
+
+
+
+            _user = prefs.getString("Usuario", "user");             //usuario de cuenta de mail
+            _password = prefs.getString("Password", "password");         //password de usuario de mail
+
+
+            _receptor = new String[ _listMail.size() ];
+
+            _listMail.toArray(_receptor);
 
 
             //obtengo las cosas del intent anterior
@@ -101,10 +129,20 @@ public class inicializando_timer extends Activity
 
         }
 
-            protected void enviarSMS() {
-                Log.i("Envio SMS", "");
+        protected void enviarSMS() {
+            Log.i("Envio SMS", "");
 
-                String phoneNo = _nroreceptor;
+            Iterator iterSMS = _listSMS.iterator();
+
+            while (iterSMS.hasNext()) {
+
+
+
+                String phoneNo = (String) iterSMS.next();
+
+
+                Log.i("numero enviado", phoneNo );
+
                 String message = _cuerpoMensaje;
 
                 try {
@@ -117,10 +155,10 @@ public class inicializando_timer extends Activity
                     e.printStackTrace();
                 }
             }
+        }
 
         protected void enviarMail() throws Exception{
 
-            String to = _receptor;
             String subject = "alarma!";
             String message = _cuerpoMensaje ;
             String attachement = _dondeEstaLaFoto;
@@ -138,9 +176,9 @@ public class inicializando_timer extends Activity
                 mail.setBody("Alarma generada automaticamente");
             }
 
-            mail.setTo(new String[] {to});
+            mail.setTo(_receptor);
 
-            mail.setFrom(_receptor);
+            mail.setFrom(_user);
 
 
             if (attachement != null) {

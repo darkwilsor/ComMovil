@@ -10,8 +10,9 @@
 
 
     <EditTextPreference android:title="Contraseña"
-        android:key="Contraseña"
-        android:summary="Ingrese la contraseña de su cuenta de mail"/>
+        android:key="Password"
+        android:summary="Ingrese la contraseña de su cuenta de mail"
+        android:password="true"/>
 
 
 
@@ -24,6 +25,8 @@
         android:title="Agregar Mails de emergencia"
         android:key="_agregarMails"
         android:summary="Agregar contactos para ser notificados por MAIL en caso de que la alarma se accione"/>
+
+
 
 
 
